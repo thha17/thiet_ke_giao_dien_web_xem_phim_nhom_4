@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh Sách Phim</title>
+    <link rel="icon" type="image/x-icon" href="logo.png">
+    <link rel="stylesheet" href="phim.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="logo.png" alt="Logo">
+            <div>ĐẶT VÉ XEM PHIM ONLINE</div>
+        </div>
+        <div class="sign_in_up">
+            <button name="sign_in">Đăng nhập</button>
+            <button name="sign_up">Đăng ký</button>
+        </div>
+    </header>
+
+    <nav class="chuyen_tab">
+        <a href="/trang chu/trangchu.html">TRANG CHỦ</a>
+        <a href="phim.html" class="active">PHIM</a>
+        <a href="khuyen_mai.html">KHUYẾN MÃI</a>
+        <a href="lien_he.html">LIÊN HỆ</a>
+    </nav>
+
+    <div class="container">
+        <div id="danh_sach_phim_section">
+            <div class="tieu_de_muc">🎞️ PHIM ĐANG CHIẾU</div>
+            <div class="grid_phim" id="vung_danh_sach_phim"></div>
+        </div>
+
+        <div id="chi_tiet_dat_ve_section">
+            <button class="btn_quay_lai" onclick="quayLaiDanhSach()">⬅ Quay lại danh sách phim</button>
+            
+            <div class="info_phim_layout">
+                <img src="" id="anh_poster_chitiet" alt="Phim">
+                <div class="info_text">
+                    <h2 id="ten_phim_chitiet">TÊN PHIM</h2>
+                    <p><strong>Thể loại:</strong> <span id="the_loai_chitiet"></span></p>
+                    <p><strong>Thời lượng:</strong> <span id="thoi_luong_chitiet"></span></p>
+                    <p><strong>Đạo diễn:</strong> <span id="dao_dien_chitiet"></span></p>
+                    <p><strong>Nội dung:</strong> <span id="noi_dung_chitiet"></span></p>
+                </div>
+            </div>
+
+            <div class="lich_chieu_box">
+                <h3>🗓 Lịch Chiếu</h3>
+                <div class="danh_sach_ngay" id="vung_chua_ngay"></div>
+                
+                <h3>⏰ Suất Chiếu</h3>
+                <div class="danh_sach_suat" id="vung_chua_suat"></div>
+            </div>
+
+            <div class="gia_ve_box">
+                <h3>💰 Giá Vé & Khuyến Mãi</h3>
+                <p>Giá vé tiêu chuẩn (Ghế thường): <span class="highlight_gia">85,000 VND</span></p>
+                <p>Giá vé VIP: <span class="highlight_gia">105,000 VND</span></p>
+            </div>
+
+            <div class="chon_ghe_box">
+                <h3>💺 Sơ đồ ghế ngồi</h3>
+                <div class="man_hinh">MÀN HÌNH CHÍNH</div>
+                
+                <div class="sodo_ghe" id="vung_chua_ghe"></div>
+
+                <div class="chu_thich_ghe">
+                    <div><div class="mau_ghe" style="background-color: #444;"></div> Trống</div>
+                    <div><div class="mau_ghe" style="background-color: #c1121f;"></div> Đang chọn</div>
+                    <div><div class="mau_ghe" style="background-color: #222; border: 1px solid #111;"></div> Đã đặt</div>
+                    <div><div class="mau_ghe" style="border-bottom: 3px solid #ffb703; background-color: #444;"></div> Ghế VIP</div>
+                </div>
+            </div>
+
+            <button class="btn_thanh_toan">VUI LÒNG CHỌN GHẾ</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer_main">
+            <div class="footer_logo"><img src="logo.png" alt="Logo"></div>
+            <div class="footer_social">
+                <h4>MẠNG XÃ HỘI</h4>
+                    <a href="#"><img src="facebook.png"> Facebook</a>
+                    <a href="#"><img src="instagram.png"> Instagram</a>
+                    <a href="#"><img src="youtube.png"> Youtube</a>
+            </div>
+            <div class="footer_links">
+                <h4>LIÊN KẾT NHANH</h4>
+                <a href="/trang chu/trangchu.html">Trang chủ</a>
+                <a href="phim.html">Phim</a>
+                 <a href="khuyen_mai">Khuyến mãi</a>
+                <a href="lien_he">Liên hệ</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="phim.js"></script>
+
+</body>
+</html>
