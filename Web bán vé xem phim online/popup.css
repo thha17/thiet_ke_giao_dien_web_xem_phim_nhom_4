@@ -5,13 +5,14 @@ form {
     left:50%;
     transform: translate(-50%, -50%);
     width: 350px;
-    background: #c1121f;
+    background: linear-gradient(to top right, #c1121f, #1656af);
     padding:25px;
     border-radius: 20px;
 
     z-index: 1001;
     box-shadow: 0 0 20px black;
     display: none;
+    color: #ffffff;
 }
 form h3{
     text-align: center;
@@ -30,21 +31,56 @@ form input[type="password"] {
     margin-top: 5px;
     border-radius: 6px;
     border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+form input[type="submit"]{
+    display: block;
+    margin: 20px auto 0;   /* căn giữa */
+    width: 60%;            /* độ rộng nút */
+    padding: 10px;         /* to hơn */
+    background: #a00f1a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;       /* chữ to hơn */
+    cursor: pointer
 }
 form input[type="submit"]:hover {
-    background: #a00f1a;
+    background: #1656af; /* chỉ đổi màu, không đổi size */
+    transition: 0.3s;
 }
 .quen_mk {
-    text-align: right;
+    text-align: center;
     margin-top: 8px;
 }
 
 .quen_mk a {
     font-size: 12px;
     text-decoration: none;
-    color: #1656af;
+    color: #ffffff;
+    text-decoration: underline;
+}
+.chua_co_tk {
+    text-align: center;
+    margin-top: 10px;
 }
 
+.chua_co_tk a {
+    font-size: 12px;
+    color: white;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.da_co_tk {
+    text-align: center;
+    margin-top:10px;
+}
+.da_co_tk a{
+    font-size: 12px;
+    color: white;
+    text-decoration: underline;
+    cursor: pointer;
+}
 .overlay {
     position: fixed;
     width: 100%;

@@ -24,3 +24,21 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
 });
+
+//khi chưa có tài khoản thì ấn vào, chuyển từ đn sang dky
+document.getElementById('chuyen_sang_dk').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.querySelector('.khung_dang_nhap').style.display = 'none';
+    document.querySelector('.khung_dang_ky').style.display = 'block';
+}); 
+//khi đã có tài khoản thì chuyển từ dky sang dn
+document.getElementById('chuyen_sang_dn').addEventListener('click', function (e) {
+    e.preventDefault();
+    document.querySelector('.khung_dang_ky').style.display = 'none';
+    document.querySelector('.khung_dang_nhap').style.display = 'block';
+});
+//khi quên mật khẩu
+document.querySelector('.quen_mk a').addEventListener('click', function(e) {
+    e.preventDefault();
+    alert('Vui lòng liên hệ tkwNhom4@gmail.com để được hỗ trợ!');
+});

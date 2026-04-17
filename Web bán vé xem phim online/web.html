@@ -103,7 +103,7 @@
             text-shadow: 2px 2px 5px#000000;
         }
 
-        nav a:hover {
+        nav a:hover, nav a.active{
             background-color: #c1121f;
             color: #ffffff;
             text-shadow: 2px 2px 5px#000000;
@@ -443,6 +443,10 @@
         <input type="password" id="mat_khau_dk" placeholder="Nhập mật khẩu">
 
         <input type="submit" value="Đăng ký">
+
+        <div class="da_co_tk">
+            <a href="#" id="chuyen_sang_dn">Bạn đã có tài khoản? Đăng nhập tại đây</a>
+        </div>
     </form>
 
     <form class="khung_dang_nhap">
@@ -456,6 +460,9 @@
 
         <input type="submit" value="Đăng nhập">
 
+        <div class="chua_co_tk">
+            <a href="#" id="chuyen_sang_dk">Bạn chưa có tài khoản? Đăng ký tại đây</a>
+        </div>
         <div class="quen_mk">
             <a href="#">Quên mật khẩu?</a>
         </div>
