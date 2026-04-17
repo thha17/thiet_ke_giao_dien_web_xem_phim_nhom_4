@@ -1,0 +1,57 @@
+
+form {
+    position: fixed;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    width: 350px;
+    background: #c1121f;
+    padding:25px;
+    border-radius: 20px;
+
+    z-index: 1001;
+    box-shadow: 0 0 20px black;
+    display: none;
+}
+form h3{
+    text-align: center;
+    margin-bottom: 15px;
+}
+form label{
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 14px;
+}
+form input[type="text"],
+form input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+form input[type="submit"]:hover {
+    background: #a00f1a;
+}
+.quen_mk {
+    text-align: right;
+    margin-top: 8px;
+}
+
+.quen_mk a {
+    font-size: 12px;
+    text-decoration: none;
+    color: #1656af;
+}
+
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    top: 0;
+    left: 0;
+    display: none;
+    z-index: 1000;
+}
