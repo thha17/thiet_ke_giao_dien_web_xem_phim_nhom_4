@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liên Hệ - Đặt vé xem phim online</title>
+    <link rel="icon" type="image/x-icon" href="image/logo.png">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: black;
+            color: white;
+            margin: 0;
+            padding: 20px 0;
+        }
+
+        /* HEADER CSS */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+            background: linear-gradient(to right, #c1121f, #1656af);
+            border-radius: 20px;
+            margin-bottom: 10px;
+            box-shadow: 0 10px 20px #000d49;
+            padding: 10px 20px;
+            flex-wrap: wrap;
+            box-sizing: border-box;
+        }
+
+        .logo img {
+            height: 60px;
+            margin: 5px 0;
+        }
+
+        .logo div {
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            text-shadow: 2px 2px 5px #000000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sign_in_up {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .sign_in_up button {
+            border-radius: 100px;
+            text-align: center;
+            width: 90px;
+            padding: 8px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .sign_in_up button[name="sign_in"] {
+            color: #003049;
+            background-color: #ffffff;
+            box-shadow: 2px 5px 5px #000000;
+        }
+
+        .sign_in_up button[name="sign_up"] {
+            background-color: #c1121f;
+            color: white;
+            box-shadow: 2px 5px 5px #000000;
+        }
+
+        /* NAV CSS */
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            background-color: #1656af;
+            align-items: center;
+            justify-content: center;
+            max-width: 1200px;
+            margin: auto;
+            width: 100%;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            padding: 5px;
+        }
+
+        nav a {
+            display: block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #FF003C;
+            font-weight: bold;
+            border-radius: 20px;
+            text-shadow: 2px 2px 5px #000000;
+        }
+
+        nav a:hover,
+        nav a.active {
+            background-color: #c1121f;
+            color: #ffffff;
+            text-shadow: 2px 2px 5px #000000;
+        }
+
+        /* LIÊN HỆ CSS */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: #111;
+            padding: 30px;
+            border-radius: 15px;
+            box-sizing: border-box;
+        }
+
+        .tieu_de_trang {
+            font-size: 24px; color: white; margin-bottom: 25px; border-left: 5px solid #c1121f; padding-left: 10px;
+            text-transform: uppercase; font-weight: bold;
+        }
+
+        .map_container {
+            width: 100%;
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            border: 2px solid #333;
+        }
+
+        .contact_grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        /* Form Bên Trái */
+        .contact_form {
+            background-color: #1a1a1a;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .form_group {
+            margin-bottom: 20px;
+        }
+
+        .form_group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #ddd;
+        }
+
+        .form_group label span {
+            color: #c1121f;
+        }
+
+        .form_group input,
+        .form_group textarea {
+            width: 100%;
+            padding: 12px;
+            background-color: #222;
+            border: 1px solid #444;
+            border-radius: 5px;
+            color: white;
+            font-family: inherit;
+            box-sizing: border-box;
+        }
+
+        .form_group input:focus,
+        .form_group textarea:focus {
+            outline: none;
+            border-color: #c1121f;
+            box-shadow: 0 0 5px rgba(193, 18, 31, 0.5);
+        }
+
+        .btn_submit {
+            background-color: #c1121f;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            float: right;
+        }
+
+        .btn_submit:hover {
+            background-color: #a00e18;
+        }
+
+        .required_note {
+            text-align: right;
+            color: #c1121f;
+            font-size: 13px;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        /* Info Bên Phải */
+        .contact_info_box {
+            padding-top: 10px;
+        }
+
+        .info_section {
+            margin-bottom: 30px;
+        }
+
+        .info_section h3 {
+            color: #aaa;
+            font-size: 20px;
+            text-transform: uppercase;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+            margin-top: 0;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .info_section p {
+            margin: 5px 0 10px 0;
+            line-height: 1.6;
+            color: #ddd;
+            font-size: 15px;
+        }
+
+        .info_section p span.highlight {
+            color: #c1121f;
+        }
+
+        /* FOOTER CSS */
+        footer {
+            width: 100%;
+            max-width: 1200px;
+            margin: 30px auto 0 auto;
+            position: relative;
+            padding: 40px 20px 20px 20px;
+            box-sizing: border-box;
+            background-image: url('image/background.jpg');
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .footer_top_logo {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer_top_logo img {
+            height: 70px;
+        }
+
+        .footer_top_logo .logo_text {
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 10px;
+            text-shadow: 2px 2px 5px #000000;
+            letter-spacing: 1px;
+        }
+
+        .footer_main {
+            display: flex;
+            gap: 40px;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer_contact,
+        .footer_social,
+        .footer_links {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .contact_item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .contact_item .icon {
+            width: 32px;
+            height: 32px;
+            background-color: #c1121f;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .footer_contact h4,
+        .footer_social h4,
+        .footer_links h4 {
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-left: 3px solid #c1121f;
+            padding-left: 8px;
+        }
+
+        .footer_social a,
+        .footer_links a {
+            display: block;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .footer_social a:hover,
+        .footer_links a:hover {
+            color: white;
+        }
+
+        .footer_bottom {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 12px;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer_social a img {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+            vertical-align: middle;
+            margin-right: 6px;
+        }
+
+        @media (max-width: 800px) {
+            .contact_grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header {
+                justify-content: center;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="image/logo.png" alt="Logo">
+            <div>ĐẶT VÉ XEM PHIM ONLINE</div>
+        </div>
+        <div class="sign_in_up">
+            <button name="sign_in">Đăng nhập</button>
+            <button name="sign_up">Đăng ký</button>
+        </div>
+    </header>
+
+    <nav class="chuyen_tab">
+        <a href="web.html">TRANG CHỦ</a>
+        <a href="phim.html">PHIM</a>
+        <a href="khuyen_mai.html">KHUYẾN MÃI</a>
+        <a href="lien_he.html" class="active">LIÊN HỆ</a>
+    </nav>
+
+    <div class="container">
+        <div class="tieu_de_trang">LIÊN HỆ VỚI CHÚNG TÔI</div>
+
+        <!-- Bản đồ Google Maps -->
+        <div class="map_container">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1862.41231392103!2d105.84362599999999!3d20.999665849999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ac70f2652d9b%3A0x2e66b6b34e872c1d!2zMjA3IMSQLiBHaeG6o2kgUGjDs25nLCDEkOG7k25nIFTDom0sIELhuqFjaCBNYWksIEjDoCBO4buZaSwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1776410275238!5m2!1svi!2s"
+                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+        <div class="contact_grid">
+            <!-- Cột trái: Form Điền thông tin -->
+            <div class="contact_form">
+                <div class="required_note">* Phải nhập thông tin</div>
+                <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Cảm ơn bạn đã gửi liên hệ!');">
+                    <div class="form_group">
+                        <label>Tên <span>*</span></label>
+                        <input type="text" required placeholder="Nhập họ và tên...">
+                    </div>
+                    <div class="form_group">
+                        <label>Email <span>*</span></label>
+                        <input type="email" required placeholder="Nhập địa chỉ email...">
+                    </div>
+                    <div class="form_group">
+                        <label>Điện thoại</label>
+                        <input type="tel" placeholder="Nhập số điện thoại...">
+                    </div>
+                    <div class="form_group">
+                        <label>Nội dung cần liên hệ <span>*</span></label>
+                        <textarea rows="5" required placeholder="Nhập nội dung..."></textarea>
+                    </div>
+                    <button type="submit" class="btn_submit">GỬI ĐI</button>
+                    <div style="clear: both;"></div>
+                </form>
+            </div>
+
+            <!-- Cột phải: Thông tin liên hệ -->
+            <div class="contact_info_box">
+                <div class="info_section">
+                    <h3>TRỤ SỞ CHÍNH</h3>
+                    <p>Tầng 2, Rivera Park Saigon - Số 7/28 Thành Thái, phường 14, Quận 10, Thành phố Hồ Chí Minh, Việt
+                        Nam.</p>
+                </div>
+
+                <div class="info_section">
+                    <h3>DỊCH VỤ KHÁCH HÀNG</h3>
+                    <p>Hotline: <strong>1900 6017</strong></p>
+                    <p>Giờ làm việc: 8:00 - 22:00<br>Tất cả các ngày bao gồm cả Lễ Tết</p>
+                    <p>Email hỗ trợ: <span class="highlight">hoidap@tkw.vn</span></p>
+                </div>
+
+                <div class="info_section">
+                    <h3>LIÊN HỆ QUẢNG CÁO</h3>
+                    <p>Phòng kinh doanh: +84-28-3636 57 57</p>
+                    <p>Ext: 278 (Ms. Hoa)</p>
+                    <p>Hotline: 0335400414</p>
+                    <p>Email: <span class="highlight">ad.tkw@cj.net</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div style="max-width: 1200px; margin: auto; position: relative; z-index: 1;">
+            <div class="footer_top_logo">
+                <img src="image/logo.png">
+                <div class="logo_text">ĐẶT VÉ XEM PHIM ONLINE</div>
+            </div>
+            <div class="footer_main">
+                <div class="footer_social">
+                    <h4>MẠNG XÃ HỘI</h4>
+                    <a href="#"><img src="image/facebook.png"> Facebook</a>
+                    <a href="#"><img src="image/instagram.png"> Instagram</a>
+                    <a href="#"><img src="image/youtube.png"> Youtube</a>
+                </div>
+                <div class="footer_links">
+                    <h4>LIÊN KẾT NHANH</h4>
+                    <a href="web.html">Trang chủ</a>
+                    <a href="phim.html">Phim</a>
+                    <a href="khuyen_mai.html">Khuyến mãi</a>
+                    <a href="lien_he.html">Liên hệ</a>
+                </div>
+                <div class="footer_contact">
+                    <h4>LIÊN HỆ</h4>
+                    <div class="contact_item">
+                        <div class="icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                        </div>
+                        <div>207 Đ. Giải Phóng, Đồng Tâm,<br>Hai Bà Trưng, Hà Nội</div>
+                    </div>
+                    <div class="contact_item">
+                        <div class="icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div>0123 456 789<br>0987 654 321</div>
+                    </div>
+                    <div class="contact_item">
+                        <div class="icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                </path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </div>
+                        <div>tkwNhom4@gmail.com<br>infoabc@domain.com</div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer_bottom">
+                <p>© 2026 All rights reserved</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
