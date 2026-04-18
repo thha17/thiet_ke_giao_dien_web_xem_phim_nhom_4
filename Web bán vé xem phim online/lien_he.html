@@ -463,7 +463,6 @@
             <!-- Cột trái: Form Điền thông tin -->
             <div class="contact_form">
                 <div class="required_note">* Phải nhập thông tin</div>
-                <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Cảm ơn bạn đã gửi liên hệ!');">
                     <div class="form_group">
                         <label>Tên <span>*</span></label>
                         <input type="text" required placeholder="Nhập họ và tên...">
@@ -480,17 +479,16 @@
                         <label>Nội dung cần liên hệ <span>*</span></label>
                         <textarea rows="5" required placeholder="Nhập nội dung..."></textarea>
                     </div>
-                    <button type="submit" class="btn_submit">GỬI ĐI</button>
-                    <div style="clear: both;"></div>
-                </form>
+                    <button type="button" class="btn_submit" >GỬI ĐI</button>
+                    
+                
             </div>
 
             <!-- Cột phải: Thông tin liên hệ -->
             <div class="contact_info_box">
                 <div class="info_section">
                     <h3>TRỤ SỞ CHÍNH</h3>
-                    <p>Tầng 2, Rivera Park Saigon - Số 7/28 Thành Thái, phường 14, Quận 10, Thành phố Hồ Chí Minh, Việt
-                        Nam.</p>
+                    <p>207 Đ. Giải Phóng, Đồng Tâm, Hai Bà Trưng, Hà Nội</p>
                 </div>
 
                 <div class="info_section">
@@ -574,4 +572,12 @@
     </footer>
 </body>
 <script src="popup.js"></script>
+<script>
+    document.querySelector('.btn_submit').addEventListener('click', function() {
+        alert('Cảm ơn bạn đã gửi liên hệ!');
+        document.querySelectorAll('.contact_form input, .contact_form textarea').forEach(function(el) {
+            el.value = '';
+        });
+    });
+</script>
 </html>
