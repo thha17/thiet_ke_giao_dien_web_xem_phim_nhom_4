@@ -424,6 +424,14 @@
             <img src="image/logo.png">
             <div>ĐẶT VÉ XEM PHIM ONLINE</div>
         </div>
+
+        <div class="thanh_tim_kiem" style="flex: 1; max-width: 400px; margin: 10px 20px; position: relative;">
+            <input type="text" id="global_search" placeholder="Bạn muốn xem phim gì?" onkeyup="xuLyTimKiemGlobal(event)" style="width: 100%; box-sizing: border-box; padding: 10px 20px; border-radius: 30px; border: none; outline: none; background: rgba(255,255,255,0.9); color: #000; box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);">
+            <svg onclick="xuLyTimKiemGlobal({key:'Enter'})" viewBox="0 0 24 24" fill="none" stroke="#c1121f" stroke-width="2" style="position: absolute; right: 15px; top: 10px; width: 18px; height: 18px; cursor: pointer;">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+        </div>
         <div class="sign_in_up">
             <button name="sign_in">Đăng nhập</button>
             <button name="sign_up">Đăng ký</button>

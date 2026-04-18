@@ -148,14 +148,35 @@ const danhSachPhim = [
 
 // --- KHỞI TẠO DANH SÁCH ---
 window.onload = function () {
-    hienThiDanhSachPhim();
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchParam = urlParams.get('search');
+    
+    if (searchParam) {
+        let sc = document.getElementById('global_search');
+        if(sc) sc.value = searchParam;
+        
+        let tuKhoa = searchParam.toLowerCase();
+        let rs = danhSachPhim.filter(p => 
+            p.ten.toLowerCase().includes(tuKhoa) || 
+            p.theLoai.toLowerCase().includes(tuKhoa) ||
+            p.daoDien.toLowerCase().includes(tuKhoa)
+        );
+        hienThiDanhSachPhim(rs);
+    } else {
+        hienThiDanhSachPhim(danhSachPhim);
+    }
 };
 
-function hienThiDanhSachPhim() {
+function hienThiDanhSachPhim(danhSach = danhSachPhim) {
     const container = document.getElementById('vung_danh_sach_phim');
     container.innerHTML = '';
 
-    danhSachPhim.forEach(phim => {
+    if (danhSach.length === 0) {
+        container.innerHTML = '<div style="color: #bbb; padding: 40px; text-align: center; grid-column: 1 / -1; font-size: 18px;">Rất tiếc, không tìm thấy bộ phim nào phù hợp với từ khóa của bạn.</div>';
+        return;
+    }
+
+    danhSach.forEach(phim => {
         let card = document.createElement('div');
         card.className = 'card_phim';
         card.onclick = function () { moChiTietPhim(phim.id); };
@@ -333,4 +354,107 @@ function tinhTien() {
         btnThanhToan.innerText = `TIẾP TỤC: THANH TOÁN ${tienFormat} VND`;
         btnThanhToan.style.opacity = "1";
     }
+}
+
+// --- THANH TOÁN ---
+function moThanhToan() {
+    let isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
+    if (!isLoggedIn) {
+        alert("Vui lòng đăng nhập để tiếp tục thanh toán!");
+        const loginForm = document.querySelector('.khung_dang_nhap');
+        const overlay = document.getElementById('overlay');
+        if (loginForm && overlay) {
+            overlay.style.display = 'block';
+            loginForm.style.display = 'block';
+        }
+        return;
+    }
+
+    let gheDangChon = document.querySelectorAll('.ghe.dang_chon');
+    if (gheDangChon.length === 0) {
+        alert("Vui lòng chọn ít nhất 1 ghế trước khi thanh toán!");
+        return;
+    }
+
+    // Lấy thông tin
+    let tenPhim = document.getElementById('ten_phim_chitiet').innerText;
+    let suatChieu = document.querySelector('.btn_suat.active') ? document.querySelector('.btn_suat.active').innerText : 'Chưa chọn';
+    let ngayChieu = document.querySelector('.btn_ngay.active') ? document.querySelector('.btn_ngay.active').innerText.replace('\n', ' ') : 'Chưa chọn';
+    
+    let danhSachGhe = [];
+    let tongTien = 0;
+    
+    gheDangChon.forEach(ghe => {
+        let hang = ghe.parentElement.querySelector('span').innerText;
+        danhSachGhe.push(hang + ghe.innerText);
+        
+        if (ghe.style.borderBottom.includes('rgb(255, 183, 3)')) {
+            tongTien += 105000;
+        } else {
+            tongTien += 85000;
+        }
+    });
+
+    document.getElementById('pay_ten_phim').innerText = tenPhim;
+    document.getElementById('pay_lich_chieu').innerText = `${suatChieu} | ${ngayChieu}`;
+    document.getElementById('pay_ghe').innerText = danhSachGhe.join(', ');
+    document.getElementById('pay_tong_tien').innerText = tongTien.toLocaleString('vi-VN') + " VND";
+
+    document.getElementById('overlay').style.display = 'block';
+    document.getElementById('payment_modal').style.display = 'block';
+}
+
+function dongThanhToan() {
+    document.getElementById('overlay').style.display = 'none';
+    document.getElementById('payment_modal').style.display = 'none';
+}
+
+function chonPhuongThucThanhToan(element) {
+    let methods = document.querySelectorAll('.method_box');
+    methods.forEach(m => m.classList.remove('active'));
+    element.classList.add('active');
+}
+
+function hoanTatThanhToan() {
+    // Lưu vé vào sessionStorage
+    let tenPhim = document.getElementById('pay_ten_phim').innerText;
+    let lichChieu = document.getElementById('pay_lich_chieu').innerText;
+    let ghe = document.getElementById('pay_ghe').innerText;
+    let tongTien = document.getElementById('pay_tong_tien').innerText;
+
+    // Lấy thời gian hiện tại
+    let now = new Date();
+    let thoiGian = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0') + ' - ' + now.getDate().toString().padStart(2, '0') + '/' + (now.getMonth() + 1).toString().padStart(2, '0') + '/' + now.getFullYear();
+
+    let ticket = {
+        phim: tenPhim,
+        lich: lichChieu,
+        ghe: ghe,
+        tien: tongTien,
+        thoiGianMua: thoiGian
+    };
+
+    let tickets = JSON.parse(sessionStorage.getItem('my_tickets')) || [];
+    tickets.push(ticket);
+    sessionStorage.setItem('my_tickets', JSON.stringify(tickets));
+
+    // Ẩn modal thanh toán, hiện modal thành công
+    document.getElementById('payment_modal').style.display = 'none';
+    document.getElementById('success_modal').style.display = 'block';
+    
+    // Chuyển ghế đang chọn thành đã đặt
+    let gheDangChon = document.querySelectorAll('.ghe.dang_chon');
+    gheDangChon.forEach(ghe => {
+        ghe.classList.remove('dang_chon');
+        ghe.classList.add('da_dat');
+        ghe.onclick = null;
+    });
+    
+    tinhTien();
+}
+
+function dongThanhToanThanhCong() {
+    document.getElementById('success_modal').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+    quayLaiDanhSach(); // Quay lại trang chọn phim
 }
